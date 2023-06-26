@@ -1,0 +1,337 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/properties":
+    post:
+      summary: Create a property
+      tags:
+      - Property
+      parameters: []
+      responses:
+        '201':
+          description: property created successfully
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                propertyType:
+                  type: string
+                numberOfBedrooms:
+                  type: integer
+                numberOfSittingRooms:
+                  type: integer
+                numberOfKitchens:
+                  type: integer
+                numberOfBathRooms:
+                  type: integer
+                numberOfToilets:
+                  type: integer
+                owner:
+                  type: string
+                description:
+                  type: string
+                validFrom:
+                  type: string
+                validTo:
+                  type: string
+              required:
+              - address
+              - propertyType
+              - owner
+              - validFrom
+          application/xml:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                propertyType:
+                  type: string
+                numberOfBedrooms:
+                  type: integer
+                numberOfSittingRooms:
+                  type: integer
+                numberOfKitchens:
+                  type: integer
+                numberOfBathRooms:
+                  type: integer
+                numberOfToilets:
+                  type: integer
+                owner:
+                  type: string
+                description:
+                  type: string
+                validFrom:
+                  type: string
+                validTo:
+                  type: string
+              required:
+              - address
+              - propertyType
+              - owner
+              - validFrom
+    get:
+      summary: Get properties
+      tags:
+      - Property
+      description: get all properties or filter by owner, propertyType, numberOfBedrooms,
+        numberOfSittingRooms, numberOfKitchens, numberOfBathrooms or numberOfToilets
+      parameters:
+      - name: owner
+        in: query
+        schema:
+          type: string
+      - name: propertyType
+        in: query
+        schema:
+          type: string
+      - name: numberOfBedrooms
+        in: query
+        schema:
+          type: string
+      - name: numberOfSittingRooms
+        in: query
+        schema:
+          type: string
+      - name: numberOfKitchens
+        in: query
+        schema:
+          type: string
+      - name: numberOfBathRooms
+        in: query
+        schema:
+          type: string
+      - name: numberOfToilets
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: properties fetched successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  address:
+                    type: string
+                  propertyType:
+                    type: string
+                  numberOfBedrooms:
+                    type: integer
+                  numberOfSittingRooms:
+                    type: integer
+                  numberOfKitchens:
+                    type: integer
+                  numberOfBathRooms:
+                    type: integer
+                  numberOfToilets:
+                    type: integer
+                  owner:
+                    type: string
+                  description:
+                    type: string
+                  validFrom:
+                    type: string
+                  validTo:
+                    type: string
+                required:
+                - address
+                - propertyType
+                - owner
+                - validFrom
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  address:
+                    type: string
+                  propertyType:
+                    type: string
+                  numberOfBedrooms:
+                    type: integer
+                  numberOfSittingRooms:
+                    type: integer
+                  numberOfKitchens:
+                    type: integer
+                  numberOfBathRooms:
+                    type: integer
+                  numberOfToilets:
+                    type: integer
+                  owner:
+                    type: string
+                  description:
+                    type: string
+                  validFrom:
+                    type: string
+                  validTo:
+                    type: string
+                required:
+                - address
+                - propertyType
+                - owner
+                - validFrom
+        '400':
+          description: bad request
+  "/api/v1/properties/{id}":
+    get:
+      summary: Get a property by Id
+      tags:
+      - Property
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: property fetched successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  address:
+                    type: string
+                  propertyType:
+                    type: string
+                  numberOfBedrooms:
+                    type: integer
+                  numberOfSittingRooms:
+                    type: integer
+                  numberOfKitchens:
+                    type: integer
+                  numberOfBathRooms:
+                    type: integer
+                  numberOfToilets:
+                    type: integer
+                  owner:
+                    type: string
+                  description:
+                    type: string
+                  validFrom:
+                    type: string
+                  validTo:
+                    type: string
+                required:
+                - address
+                - propertyType
+                - owner
+                - validFrom
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  address:
+                    type: string
+                  propertyType:
+                    type: string
+                  numberOfBedrooms:
+                    type: integer
+                  numberOfSittingRooms:
+                    type: integer
+                  numberOfKitchens:
+                    type: integer
+                  numberOfBathRooms:
+                    type: integer
+                  numberOfToilets:
+                    type: integer
+                  owner:
+                    type: string
+                  description:
+                    type: string
+                  validFrom:
+                    type: string
+                  validTo:
+                    type: string
+                required:
+                - address
+                - propertyType
+                - owner
+                - validFrom
+        '404':
+          description: property not found
+    put:
+      summary: Update a property
+      tags:
+      - Property
+      parameters: []
+      responses:
+        '200':
+          description: property updated successfully
+        '404':
+          description: Property does not exist
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                numberOfBedrooms:
+                  type: integer
+                numberOfSittingRooms:
+                  type: integer
+                numberOfKitchens:
+                  type: integer
+                numberOfBathRooms:
+                  type: integer
+                numberOfToilets:
+                  type: integer
+                description:
+                  type: string
+                validTo:
+                  type: string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                numberOfBedrooms:
+                  type: integer
+                numberOfSittingRooms:
+                  type: integer
+                numberOfKitchens:
+                  type: integer
+                numberOfBathRooms:
+                  type: integer
+                numberOfToilets:
+                  type: integer
+                description:
+                  type: string
+                validTo:
+                  type: string
+    delete:
+      summary: Delete a property
+      tags:
+      - Property
+      responses:
+        '200':
+          description: property deleted successfully
+        '404':
+          description: Property does not exist
+        '422':
+          description: invalid request
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
