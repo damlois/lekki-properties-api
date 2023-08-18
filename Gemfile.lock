@@ -78,6 +78,8 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.0)
+      rails
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -103,6 +105,7 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.4)
     minitest (5.18.1)
     msgpack (1.7.1)
     net-imap (0.3.6)
@@ -115,8 +118,14 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.2)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.15.2-x64-mingw-ucrt)
       racc (~> 1.4)
+    nokogiri (1.15.2-x86_64-linux)
+      racc (~> 1.4)
+    pg (1.5.3)
     pg (1.5.3-x64-mingw-ucrt)
     public_suffix (5.0.1)
     puma (5.6.6)
@@ -200,11 +209,14 @@ GEM
     zeitwerk (2.6.8)
 
 PLATFORMS
+  ruby
   x64-mingw-ucrt
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap
   debug
+  dockerfile-rails (~> 1.5)
   dotenv-rails
   pg (~> 1.1)
   puma (~> 5.0)

@@ -1,44 +1,63 @@
-# ARG RUBY_VERSION=3.2.2
-# FROM ruby:$RUBY_VERSION
+# FROM ruby:3.2.2
 
-# RUN apt-get update -qq && \
-#     apt-get install -y build-essential libvips bash bash-completion libffi-dev tzdata postgresql nodejs npm yarn && \
-#     apt-get clean && \
-#     rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
-
+# RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 # WORKDIR /rails
 
-# ENV RAILS_LOG_TO_STDOUT="1" \
-#     RAILS_SERVE_STATIC_FILES="true" \
-#     RAILS_ENV="production" \
-#     BUNDLE_WITHOUT="development"
-
 # COPY Gemfile Gemfile.lock ./
-# COPY bin/docker-entrypoint ./
-# RUN bundle install
 
 # COPY . .
 
-# RUN bundle exec bootsnap precompile --gemfile app/ lib/
-# # RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+# RUN bundle install
 
-# ENTRYPOINT ["/bin/docker-entrypoint"]
-
+# RUN chmod +x docker-entrypoint.sh
+# ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 # EXPOSE 3000
-# CMD ["./bin/rails", "server"]
+
+# CMD ["rails", "server", "-b", "0.0.0.0"]
+
+# Put the ruby ​​version you are using
+# FROM ruby:3.2.2
+
+# # Install the necessary libraries
+# RUN apt-get update -qq && apt-get install -y postgresql-client
+
+# # BUNDLE_FROZEN setting
+# RUN bundle config --global frozen 1
+
+# # Set working directory
+# WORKDIR /lekki-properties-api
+
+# # Copy and install the project gems
+# COPY Gemfile /lekki-properties-api/Gemfile
+# COPY Gemfile.lock /lekki-properties-api/Gemfile.lock
+# RUN bundle install
+
+# # Run entrypoint.sh to delete server.pid
+# COPY entrypoint.sh /usr/bin/
+# RUN chmod +x /usr/bin/entrypoint.sh
+# ENTRYPOINT ["entrypoint.sh"]
+
+# # Listen on this specified network port
+# EXPOSE 3000
+
+# # Run rails server
+# CMD ["rails", "server", "-b", "0.0.0.0"]
 
 FROM ruby:3.2.2
-
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-WORKDIR /rails
-
-COPY Gemfile Gemfile.lock docker-entrypoint ./
-
-COPY . .
-
+# Set working directory
+WORKDIR /app
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    nodejs
+# Install bundler
+RUN gem install bundler
+# Copy Gemfile and Gemfile.lock
+COPY Gemfile Gemfile.lock ./
+# Install gems
 RUN bundle install
-
-ENTRYPOINT ["/rails/docker-entrypoint"]
-EXPOSE 3000
-
+# Copy the rest of the application code
+COPY . .
+# Start the Rails server
 CMD ["rails", "server", "-b", "0.0.0.0"]
