@@ -2,7 +2,10 @@
 A property management API built with Ruby on Rails. You can create a new property, update a property, get a property, or delete a property. This is summarily a simple API to perform basic CRUD operations on properties/apartments.
 
 ## Running the API
-To run this app locally WITHOUT DOCKER, run 'rails server'.
+To run this app locally WITHOUT DOCKER, run the following commands:
+* **rake db:create** (this creates the database)
+* **rake db:migrate** (this runs all migrations)
+* **rails server** (this gets the server running)
 
 To run this app WITH DOCKER, run the following commands:
 * **docker-compose build** (this builds the image)
